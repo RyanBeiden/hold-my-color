@@ -1,0 +1,38 @@
+{
+  "color1": {
+    "uid": "12345",
+    "name": "primaryColor",
+    "paletteId": "palette1",
+    "code": "#123456"
+  },
+  "color2": {
+    "uid": "12345",
+    "name": "textColor",
+    "paletteId": "palette1",
+    "code": "#000000"
+  },
+  "color3": {
+    "uid": "12345",
+    "name": "secondaryColor",
+    "paletteId": "palette2",
+    "code": "#414141"
+  },
+  "color4": {
+    "uid": "12345",
+    "name": "backgroundColor",
+    "paletteId": "palette2",
+    "code": "#4111F2"
+  },
+  "color5": {
+    "uid": "12345",
+    "name": "shadowcolor",
+    "paletteId": "palette3",
+    "code": "#222222"
+  },
+  "color6": {
+    "uid": "12345",
+    "name": "FontColor",
+    "paletteId": "palette3",
+    "code": "#3F3F3F"
+  }
+}

@@ -2,7 +2,11 @@ import React from 'react';
 
 import Button from '@material-ui/core/Button';
 
+import connection from '../helpers/data/connection';
+
 import './App.scss';
+
+connection();
 
 class App extends React.Component {
   render() {

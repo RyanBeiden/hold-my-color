@@ -1,0 +1,17 @@
+{
+  "palette1": {
+    "uid": "12345",
+    "name": "Personal Bio Site",
+    "sassExport": "$primaryColor: #123456;"
+  },
+  "palette2": {
+    "uid": "12345",
+    "name": "Tamagotchi",
+    "sassExport": ""
+  },
+  "palette3": {
+    "uid": "12345",
+    "name": "Bear Watcher",
+    "sassExport": ""
+  }
+}
