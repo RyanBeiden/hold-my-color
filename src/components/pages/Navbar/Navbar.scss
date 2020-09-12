@@ -50,3 +50,30 @@ nav {
 .Navbar__login {
   text-align: center !important;
 }
+
+
+// Tablet
+
+@media only screen and (max-width: 1300px) {
+  .Navbar__wave {
+    border-top: 50px solid white;
+  }
+}
+
+// Phone (Large)
+
+@media only screen and (max-width: 550px) {
+  .Navbar__logo {
+    font-size: 25px;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+}
+
+// Phone (Small)
+
+@media only screen and (max-width: 400px) {
+  .Navbar__wave {
+    border-top: 75px solid white;
+  }
+}
