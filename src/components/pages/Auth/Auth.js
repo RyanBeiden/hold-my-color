@@ -10,10 +10,6 @@ import {
 import './Auth.scss';
 
 class Auth extends React.Component {
-  state = {
-    authed: false,
-  }
-
   googleSignIn = (e) => {
     e.preventDefault();
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -28,28 +24,17 @@ class Auth extends React.Component {
     this.setState({ authed: true });
   }
 
-  signOut = (e) => {
-    e.preventDefault();
-    firebase.auth().signOut();
-    this.setState({ authed: false });
-  }
-
   render() {
-    const { authed } = this.state;
-
     return (
       <div className="Auth">
-        {authed
-          ? <Button variant="outlined" onClick={this.signOut}>Sign Out</Button>
-          : <Container>
-              <div className="Auth__button">
-                <Button variant="outlined" onClick={this.googleSignIn}>Google Sign In</Button>
-              </div>
-              <div className="Auth__button">
-                <Button variant="outlined" onClick={this.githubSignIn}>Github Sign In</Button>
-              </div>
-            </Container>
-        }
+        <Container>
+          <div className="Auth__button">
+            <Button variant="outlined" onClick={this.googleSignIn}>Google Sign In</Button>
+          </div>
+          <div className="Auth__button">
+            <Button variant="outlined" onClick={this.githubSignIn}>Github Sign In</Button>
+          </div>
+        </Container>
       </div>
     );
   }

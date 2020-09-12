@@ -1,0 +1,52 @@
+@import '../../../styles/variables';
+
+nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+.Navbar__wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  transform: rotateY(180deg);
+}
+
+.Navbar__logo {
+  align-self: flex-start;
+  justify-self: flex-start;
+
+  text-align: left;
+  font-size: 35px;
+  color: $primaryColor;
+
+  margin: 35px 0px 0px 35px;
+}
+
+.Navbar__icon {
+  align-self: flex-start;
+  justify-self: flex-end;
+
+  color: $primaryColor !important;
+
+  margin: 12px 25px 0px 0px !important;
+}
+
+.Navbar__menu-content {
+  border-radius: $borderRadius !important;
+  border: 2px solid $primaryColor !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.Navbar__sign-in {
+  text-align: center !important;
+  border-bottom: 2px solid $primaryColor !important;
+}
+
+.Navbar__login {
+  text-align: center !important;
+}
