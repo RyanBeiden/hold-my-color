@@ -1,6 +1,11 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import 'variables';
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   height: 100vh;
 
@@ -32,4 +37,14 @@ h3 {
 
 .MuiButton-outlined:hover {
   background-color: $hoverColor !important;
+}
+
+.MuiButton-contained {
+  color: $primaryColor !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.MuiSvgIcon-root {
+  font-size: 2.5rem !important;
 }
