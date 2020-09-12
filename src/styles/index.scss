@@ -1,0 +1,18 @@
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import 'variables';
+
+body {
+  height: 100vh;
+
+  font-family: $primaryFont;
+  background: $backgroundColor;
+  color: $textColor;
+}
+
+h1, h2 {
+  font-weight: $bold;
+}
+
+h3 {
+  font-weight: $light;
+}
