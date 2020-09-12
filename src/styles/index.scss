@@ -16,3 +16,20 @@ h1, h2 {
 h3 {
   font-weight: $light;
 }
+
+.MuiButton-outlined {
+  font-family: $primaryFont !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+
+  border: $border !important;
+  border-radius: $borderRadius !important;
+
+  color: $textColor !important;
+
+  padding: 5px 20px 1px 20px !important;
+}
+
+.MuiButton-outlined:hover {
+  background-color: $hoverColor !important;
+}
