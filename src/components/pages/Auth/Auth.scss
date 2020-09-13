@@ -1,3 +1,75 @@
+@import '../../../styles/variables';
+
+.Auth {
+  margin-top: 150px;
+
+  h2 {
+    font-size: 35px !important;
+
+    margin-bottom: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  h3 {
+    color: $secondaryTextColor;
+
+    margin-bottom: 50px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  h4 {
+    font-size: 25px;
+    font-weight: $light;
+
+    margin-bottom: 15px;
+  }
+}
+
+.Auth__container {
+  border: $border;
+  border-radius: $borderRadius;
+  padding: 25px;
+  max-width: 800px !important;
+}
+
 .Auth__button {
-  margin: 15px;
+  margin: 30px 20px 20px 20px;
+}
+
+.fa-google,
+.fa-github {
+  font-size: 23px;
+  padding-right: 8px;
+  padding-bottom: 4px;
+}
+
+.Auth__created-by {
+  text-align: center;
+  font-size: 14px;
+
+  margin: 50px 20px 20px 20px;
+}
+
+// Tablet
+
+@media only screen and (max-width: 865px) and (min-width: 591px) {
+  .Auth__container {
+    width: 550px !important;
+  }
+
+  .Auth__created-by {
+    bottom: 2%;
+  }
+}
+
+@media only screen and (max-width: 590px) {
+  .Auth {
+    margin-top: 25px;
+  }
+
+  .Auth__container {
+    width: 300px !important;
+  }
 }
