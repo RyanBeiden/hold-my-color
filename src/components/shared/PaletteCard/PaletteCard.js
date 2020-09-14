@@ -23,7 +23,7 @@ class PaletteCard extends React.Component {
     const paletteLink = `/palettes/${palette.id}`;
 
     return (
-      <Card className="PaletteCard__container">
+      <Card className="PaletteCard">
           <CardActionArea className="PaletteCard__action">
             <Link to={paletteLink} className="CardPalette__link">
               <CardContent>

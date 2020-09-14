@@ -30,6 +30,14 @@
   }
 }
 
+.SinglePalette__colors {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  margin-top: 50px;
+}
+
 // Mobile
 
 @media only screen and (max-width: 600px) {
