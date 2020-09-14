@@ -1,0 +1,22 @@
+@import '../../../styles/variables';
+
+.PaletteCard__container {
+  width: 400px;
+  margin: 25px;
+
+  .MuiDivider-root {
+    width: 50% !important;
+    background-color: $darkTextColor !important;
+
+    margin-bottom: 20px !important;
+  }
+}
+
+.PaletteCard__action {
+  padding: 10px 35px !important;
+}
+
+.MuiTypography-h5 {
+  font-size: 28px !important;
+  color: $darkTextColor;
+}
