@@ -1,0 +1,39 @@
+.SinglePalette {
+  margin-top: 150px;
+
+  h2 {
+    font-size: 35px !important;
+  }
+}
+
+.SinglePalette__title {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr 1fr 1fr;;
+}
+
+.SinglePalette-new-button {
+  width: 200px !important;
+  margin: auto !important;
+  border-width: 2px !important;
+  margin-top: 10px !important;
+
+  font-size: 1.1em !important;
+
+  .fa-plus {
+    padding: 3px 10px 7px 0px;
+  }
+
+  .fa-file-export {
+    padding: 3px 0px 7px 10px;
+  }
+}
+
+// Mobile
+
+@media only screen and (max-width: 600px) {
+  .SinglePalette {
+    margin-top: 50px;
+  }
+}

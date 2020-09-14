@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Card,
@@ -19,20 +20,23 @@ class PaletteCard extends React.Component {
 
   render() {
     const { palette } = this.props;
+    const paletteLink = `/palettes/${palette.id}`;
 
     return (
       <Card className="PaletteCard__container">
-        <CardActionArea className="PaletteCard__action">
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h3">
-              {palette.name}
-            </Typography>
-            <Divider />
-            <Typography variant="body2" color="textSecondary" component="p">
-              Color Preview Here
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+          <CardActionArea className="PaletteCard__action">
+            <Link to={paletteLink} className="CardPalette__link">
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h3">
+                  {palette.name}
+                </Typography>
+                <Divider />
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Color Preview Here
+                </Typography>
+              </CardContent>
+            </Link>
+          </CardActionArea>
       </Card>
     );
   }
