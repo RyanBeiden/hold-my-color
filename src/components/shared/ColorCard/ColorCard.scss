@@ -1,0 +1,29 @@
+@import '../../../styles/variables';
+
+.ColorCard {
+  width: 400px;
+  margin: 25px;
+
+  h4 {
+    font-size: 1.6em !important;
+    font-weight: $light !important;
+    color: $darkTextColor !important;
+    padding: 22px 0px 15px 0px;
+  }
+
+  .MuiCardContent-root {
+    padding: 0 !important;
+  }
+
+  .MuiDivider-root {
+    width: 50% !important;
+    background-color: $darkTextColor !important;
+
+    margin-bottom: 20px !important;
+  }
+}
+
+.ColorCard__background {
+  padding: 100px;
+  margin: 0 !important;
+}
