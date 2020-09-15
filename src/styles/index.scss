@@ -61,3 +61,27 @@ h3 {
   padding: 1px 0px;
   border-radius: 4px !important;
 }
+
+.MuiInput-underline:before {
+  border-color: #fff !important;
+}
+
+.MuiInput-underline:after {
+  border-color: $textColor !important;
+}
+
+.MuiInputBase-root,
+.MuiFormLabel-root {
+  color: #fff !important;
+  font-size: 1.1em !important;
+  font-family: $primaryFont !important;
+}
+
+select {
+  padding: 6px 4px 5px 3px !important;
+  border: 1px solid $textColor !important;
+  color: $darkTextColor !important;
+  border-radius: $borderRadius !important;
+  font-family: $primaryFont !important;
+  font-size: 1em !important;
+}

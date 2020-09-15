@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 
@@ -35,7 +36,7 @@ class Home extends React.Component {
       <div className="Home">
         <div className="Home__title">
           <h2>My Palettes</h2>
-          <Button className="Home__new-button" variant="outlined"><i className="fas fa-plus"></i></Button>
+          <Link to='/new-palette' className="Home__Link"><Button className="Home__new-button" variant="outlined"><i className="fas fa-plus"></i></Button></Link>
         </div>
         <div className="Home__palette-container">
           {paletteCards}
