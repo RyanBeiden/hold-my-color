@@ -7,20 +7,50 @@ import {
   Typography,
   CardContent,
   Divider,
+  Box,
 } from '@material-ui/core';
 
 import paletteShape from '../../../helpers/props/paletteShape';
+import colorData from '../../../helpers/data/colorData';
 
 import './PaletteCard.scss';
 
 class PaletteCard extends React.Component {
+  state = {
+    colorBackground: [],
+  }
+
   static propTypes = {
     palette: paletteShape.paletteShape,
   }
 
+  componentDidMount() {
+    this.getColorPreview();
+  }
+
+  getColorPreview = () => {
+    const { palette } = this.props;
+    colorData.getColorsByPaletteId(palette.id)
+      .then((response) => {
+        const newColorArray = [];
+        response.forEach((res) => {
+          const oneColor = res.code;
+          newColorArray.push(oneColor);
+          this.setState({ colorBackground: newColorArray });
+        });
+      })
+      .catch((err) => console.error(err));
+  }
+
   render() {
+    const { colorBackground } = this.state;
     const { palette } = this.props;
     const paletteLink = `/palettes/${palette.id}`;
+    const colorPreviews = colorBackground.map((colorCode) => <div
+      className="CardPalette__preview"
+      style={{ backgroundColor: colorCode }}
+      key={colorCode}
+    ></div>);
 
     return (
       <Card className="PaletteCard">
@@ -31,9 +61,9 @@ class PaletteCard extends React.Component {
                   {palette.name}
                 </Typography>
                 <Divider />
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Color Preview Here
-                </Typography>
+                <Box display="flex" justifyContent="center">
+                  {colorPreviews}
+                </Box>
               </CardContent>
             </Link>
           </CardActionArea>
