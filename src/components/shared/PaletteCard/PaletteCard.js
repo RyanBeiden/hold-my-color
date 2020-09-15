@@ -17,7 +17,7 @@ import './PaletteCard.scss';
 
 class PaletteCard extends React.Component {
   state = {
-    colorBackground: [],
+    colorsToPreview: [],
   }
 
   static propTypes = {
@@ -36,17 +36,18 @@ class PaletteCard extends React.Component {
         response.forEach((res) => {
           const oneColor = res.code;
           newColorArray.push(oneColor);
-          this.setState({ colorBackground: newColorArray });
+          this.setState({ colorsToPreview: newColorArray });
         });
       })
       .catch((err) => console.error(err));
   }
 
   render() {
-    const { colorBackground } = this.state;
+    const { colorsToPreview } = this.state;
     const { palette } = this.props;
+
     const paletteLink = `/palettes/${palette.id}`;
-    const colorPreviews = colorBackground.map((colorCode) => <div
+    const colorPreviews = colorsToPreview.map((colorCode) => <div
       className="CardPalette__preview"
       style={{ backgroundColor: colorCode }}
       key={colorCode}

@@ -3,4 +3,6 @@ import 'firebase/auth';
 
 const getUid = () => firebase.auth().currentUser.uid;
 
-export default { getUid };
+const getGithubUser = () => firebase.auth().currentUser.providerData[0].providerId;
+
+export default { getUid, getGithubUser };

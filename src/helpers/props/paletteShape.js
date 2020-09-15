@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 
 const paletteShape = PropTypes.shape({
   name: PropTypes.string.isRequired,
-  sassExport: PropTypes.string.isRequired,
   uid: PropTypes.string.isRequired,
 });
 

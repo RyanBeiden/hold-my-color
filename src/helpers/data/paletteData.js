@@ -13,4 +13,6 @@ const getPalettesByUid = (uid) => new Promise((resolve, reject) => {
 
 const getPaletteById = (paletteId) => axios.get(`${baseUrl}/palettes/${paletteId}.json`);
 
-export default { getPalettesByUid, getPaletteById };
+const addPalette = (newPalette) => axios.post(`${baseUrl}/palettes.json`, newPalette);
+
+export default { getPalettesByUid, getPaletteById, addPalette };
