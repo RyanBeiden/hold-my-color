@@ -16,11 +16,12 @@ class NewPalette extends React.Component {
   state = {
     name: '',
     githubUser: false,
+    userRepos: [],
   }
 
   componentDidMount() {
-    const user = authData.getGithubUser();
-    if (user === 'github.com') {
+    const githubUser = authData.getGithubUser();
+    if (githubUser === 'github.com') {
       this.setState({ githubUser: true });
     }
   }

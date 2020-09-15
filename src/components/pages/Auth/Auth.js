@@ -8,21 +8,32 @@ import {
   Divider,
 } from '@material-ui/core';
 
+import authData from '../../../helpers/data/authData';
+
 import './Auth.scss';
 
 class Auth extends React.Component {
   googleSignIn = (e) => {
     e.preventDefault();
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider);
-    this.setState({ authed: true });
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(googleProvider);
   }
 
   githubSignIn = (e) => {
     e.preventDefault();
-    const provider = new firebase.auth.GithubAuthProvider();
-    firebase.auth().signInWithPopup(provider);
-    this.setState({ authed: true });
+    const githubProvider = new firebase.auth.GithubAuthProvider();
+    githubProvider.addScope('repo');
+    authData.getUserRepos(githubProvider)
+      .then((response) => {
+        console.warn(response);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const { email } = error;
+        const { credential } = error;
+        console.error(`Error Code: ${errorCode} | Error Message: ${errorMessage} | Email of the user's account used: ${email} | Auth Credential type used: ${credential}`);
+      });
   }
 
   render() {
