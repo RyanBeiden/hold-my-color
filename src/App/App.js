@@ -59,7 +59,7 @@ class App extends React.Component {
     const { authed } = this.state;
 
     return (
-      <div className="App">
+      <div className='App'>
         <BrowserRouter>
           <React.Fragment>
             <Navbar authed={authed} />
