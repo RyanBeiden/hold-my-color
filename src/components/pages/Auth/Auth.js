@@ -8,21 +8,29 @@ import {
   Divider,
 } from '@material-ui/core';
 
+import authData from '../../../helpers/data/authData';
+
 import './Auth.scss';
 
 class Auth extends React.Component {
-  googleSignIn = (e) => {
+  googleSignInEvent = (e) => {
     e.preventDefault();
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider);
-    this.setState({ authed: true });
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(googleProvider);
   }
 
-  githubSignIn = (e) => {
+  githubSignInEvent = (e) => {
     e.preventDefault();
-    const provider = new firebase.auth.GithubAuthProvider();
-    firebase.auth().signInWithPopup(provider);
-    this.setState({ authed: true });
+    const githubProvider = new firebase.auth.GithubAuthProvider();
+    githubProvider.addScope('repo user');
+    authData.githubSignIn(githubProvider)
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const { email } = error;
+        const { credential } = error;
+        console.error(`Error Code: ${errorCode} | Error Message: ${errorMessage} | Email of the user's account used: ${email} | Auth Credential type used: ${credential}`);
+      });
   }
 
   render() {
@@ -34,10 +42,10 @@ class Auth extends React.Component {
           <h4>Sign in to build a palette</h4>
           <Divider />
           <div className="Auth__button">
-            <Button variant="outlined" onClick={this.googleSignIn}><i className="fab fa-google"></i> Sign in with Google</Button>
+            <Button variant="outlined" onClick={this.googleSignInEvent}><i className="fab fa-google"></i> Sign in with Google</Button>
           </div>
           <div className="Auth__button">
-            <Button variant="outlined" onClick={this.githubSignIn}><i className="fab fa-github"></i> Sign in with Github</Button>
+            <Button variant="outlined" onClick={this.githubSignInEvent}><i className="fab fa-github"></i> Sign in with Github</Button>
           </div>
         </Container>
         <footer className="Auth__created-by">Created by Ryan Beiden</footer>
