@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 
 import paletteData from '../../../helpers/data/paletteData';
+import githubData from '../../../helpers/data/githubData';
 import authData from '../../../helpers/data/authData';
 
 import './NewPalette.scss';
@@ -24,6 +25,11 @@ class NewPalette extends React.Component {
     if (githubUser === 'github.com') {
       this.setState({ githubUser: true });
     }
+    githubData.getUserRepos()
+      .then((response) => {
+        this.setState({ userRepos: response.data });
+      })
+      .catch((err) => console.error(err));
   }
 
   changeNameEvent = (e) => {
@@ -49,7 +55,12 @@ class NewPalette extends React.Component {
   }
 
   render() {
-    const { name, githubUser } = this.state;
+    const { name, githubUser, userRepos } = this.state;
+
+    const repoOptions = userRepos.map((repo) => <option
+      value={repo.name}
+      key={repo.id}
+    >{repo.name}</option>);
 
     return (
       <div className="NewPalette">
@@ -68,10 +79,7 @@ class NewPalette extends React.Component {
             <h4>Link an existing Github repository</h4>
             <div className="NewPalette__select">
               <select>
-                <option value="grapefruit">Grapefruit</option>
-                <option value="lime">Lime</option>
-                <option value="coconut">Coconut</option>
-                <option value="mango">Mango</option>
+                {repoOptions}
               </select>
             </div>
           </div>
