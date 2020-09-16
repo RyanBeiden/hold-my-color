@@ -7,12 +7,12 @@ const getUid = () => firebase.auth().currentUser.uid;
 const getGithubUser = () => firebase.auth().currentUser.providerData[0].providerId;
 
 const user = 'https://api.github.com/user';
-let token = '';
 
 const githubSignIn = (provider) => new Promise((resolve, reject) => {
   firebase.auth().signInWithPopup(provider)
     .then((response) => {
-      token = response.credential.accessToken;
+      const token = response.credential.accessToken;
+      localStorage.setItem('token', token);
 
       axios.get(user, {
         headers: {
@@ -25,11 +25,8 @@ const githubSignIn = (provider) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-const setAccessToken = () => token;
-
 export default {
   getUid,
   getGithubUser,
   githubSignIn,
-  setAccessToken,
 };

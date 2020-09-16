@@ -16,6 +16,7 @@ import './NewPalette.scss';
 class NewPalette extends React.Component {
   state = {
     name: '',
+    githubRepo: false,
     githubUser: false,
     userRepos: [],
   }
@@ -23,18 +24,27 @@ class NewPalette extends React.Component {
   componentDidMount() {
     const githubUser = authData.getGithubUser();
     if (githubUser === 'github.com') {
-      this.setState({ githubUser: true });
+      githubData.getUserRepos()
+        .then((response) => {
+          this.setState({ userRepos: response.data, githubUser: true });
+        })
+        .catch((err) => console.error(err));
     }
-    githubData.getUserRepos()
-      .then((response) => {
-        this.setState({ userRepos: response.data });
-      })
-      .catch((err) => console.error(err));
   }
 
   changeNameEvent = (e) => {
     e.preventDefault();
     this.setState({ name: e.target.value });
+  }
+
+  handleRepoEvent = (e) => {
+    e.preventDefault();
+    this.setState({ name: e.target.value });
+    if (e.target.value === 'None') {
+      this.setState({ githubRepo: false, name: '' });
+    } else {
+      this.setState({ githubRepo: true });
+    }
   }
 
   savePalette = (e) => {
@@ -55,7 +65,12 @@ class NewPalette extends React.Component {
   }
 
   render() {
-    const { name, githubUser, userRepos } = this.state;
+    const {
+      name,
+      githubRepo,
+      githubUser,
+      userRepos,
+    } = this.state;
 
     const repoOptions = userRepos.map((repo) => <option
       value={repo.name}
@@ -65,7 +80,7 @@ class NewPalette extends React.Component {
     return (
       <div className="NewPalette">
         <h2>New Palette</h2>
-        <FormControl className="NewPalette__form">
+        <FormControl className="NewPalette__form" disabled={!!githubRepo}>
           <InputLabel htmlFor="paletteName">Palette Name</InputLabel>
           <Input
             id="paletteName"
@@ -78,7 +93,8 @@ class NewPalette extends React.Component {
           ? <div className="NewPalette__github">
             <h4>Link an existing Github repository</h4>
             <div className="NewPalette__select">
-              <select>
+              <select onChange={this.handleRepoEvent}>
+                <option>None</option>
                 {repoOptions}
               </select>
             </div>
