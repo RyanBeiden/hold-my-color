@@ -1,0 +1,32 @@
+@import '../../../styles/variables';
+
+.NewColor {
+  margin-top: 150px;
+
+  h2 {
+    font-size: 35px !important;
+  }
+}
+
+.NewColor__form {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.NewColor__select {
+  text-align: left !important;
+  margin-top: 10px;
+}
+
+.NewColor__save {
+  background-color: $textColor !important;
+  color: $primaryColor !important;
+  padding: 3px 25px 2px 25px !important;
+  font-size: 1.2em !important;
+  margin-top: 100px !important;
+  text-align: center !important;
+}
+
+.NewColor__save:hover {
+  background-color: #ebebeb !important;
+}

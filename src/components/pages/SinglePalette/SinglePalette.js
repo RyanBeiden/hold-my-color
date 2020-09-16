@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Button,
@@ -39,6 +40,7 @@ class SinglePalette extends React.Component {
 
   render() {
     const { palette, colors } = this.state;
+    const newColorLink = `/${this.props.match.params.paletteId}/new-color`;
 
     const colorCards = colors.map((color) => <ColorCard
       key={color.id}
@@ -49,7 +51,7 @@ class SinglePalette extends React.Component {
       <div className="SinglePalette">
         <div className="SinglePalette__title">
           <h2>{palette.name}</h2>
-          <Button className="SinglePalette-new-button" variant="outlined"><i className="fas fa-plus"></i> New Color</Button>
+          <Link to={newColorLink} className="SinglePalette__Link"><Button className="SinglePalette-new-button" variant="outlined"><i className="fas fa-plus"></i> New Color</Button></Link>
           <Button className="SinglePalette-new-button" variant="outlined">Export SASS <i className="fas fa-file-export"></i></Button>
         </div>
         <div className="SinglePalette__colors">

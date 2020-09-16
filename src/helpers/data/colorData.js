@@ -11,4 +11,6 @@ const getColorsByPaletteId = (paletteId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getColorsByPaletteId };
+const addColor = (newColor) => axios.post(`${baseUrl}/colors.json`, newColor);
+
+export default { getColorsByPaletteId, addColor };
