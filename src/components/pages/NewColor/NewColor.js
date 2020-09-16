@@ -1,10 +1,12 @@
 import React from 'react';
+import Chrome from 'react-color';
 
 import {
   FormControl,
   InputLabel,
   Input,
   Button,
+  Box,
 } from '@material-ui/core';
 
 import colorData from '../../../helpers/data/colorData';
@@ -15,6 +17,7 @@ import './NewColor.scss';
 class NewColor extends React.Component {
   state = {
     name: '',
+    background: '#BE85E0',
   }
 
   changeNameEvent = (e) => {
@@ -23,9 +26,13 @@ class NewColor extends React.Component {
     this.setState({ name: noSpacedValue });
   }
 
+  handleColorChange = (color) => {
+    this.setState({ background: color.hex });
+  };
+
   saveColor = (e) => {
     e.preventDefault();
-    const { name } = this.state;
+    const { name, background } = this.state;
     this.setState({ name: name.split(' ').join('') });
 
     const uid = authData.getUid();
@@ -33,6 +40,7 @@ class NewColor extends React.Component {
 
     const newColor = {
       name,
+      code: background,
       uid,
       paletteId: paletteId.paletteId,
     };
@@ -47,6 +55,7 @@ class NewColor extends React.Component {
   render() {
     const {
       name,
+      background,
     } = this.state;
 
     return (
@@ -61,6 +70,16 @@ class NewColor extends React.Component {
             value={name}
           />
         </FormControl>
+        <Box className="NewColor__picker-container">
+          <Chrome
+            color={background}
+            onChange={this.handleColorChange}
+          />
+          <div className="NewColor__preview-container">
+            <div className="NewColor__preview" style={{ backgroundColor: background }}></div>
+            <div className="NewColor__preview-name">{name}</div>
+          </div>
+        </Box>
         <div className="NewColor__button">
           <Button variant="outlined" className="NewColor__save" onClick={this.saveColor}>Save</Button>
         </div>
