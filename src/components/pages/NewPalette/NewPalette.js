@@ -40,7 +40,7 @@ class NewPalette extends React.Component {
   handleRepoEvent = (e) => {
     e.preventDefault();
     this.setState({ name: e.target.value });
-    if (e.target.value === 'None') {
+    if (e.target.value === 'Select a repo') {
       this.setState({ githubRepo: false, name: '' });
     } else {
       this.setState({ githubRepo: true });
@@ -94,7 +94,7 @@ class NewPalette extends React.Component {
             <h4>Link an existing Github repository</h4>
             <div className="NewPalette__select">
               <select onChange={this.handleRepoEvent}>
-                <option>None</option>
+                <option>Select a repo</option>
                 {repoOptions}
               </select>
             </div>
