@@ -27,7 +27,7 @@
   width: 220px !important;
   margin: auto !important;
   border-width: 2px !important;
-  margin-top: 0px !important;
+  margin-top: 10px !important;
   border-color: $darkTextColor !important;
   color: $darkTextColor !important;
 
@@ -46,9 +46,21 @@
   background-color: #ebebeb !important;
 }
 
-.SinglePalette__new-link {
+.SinglePalette__Link {
   text-decoration: none !important;
-  margin-bottom: 0px !important;
+}
+
+.SinglePalette__edit {
+  color: $darkTextColor !important;
+  font-size: 30px !important;
+  padding: 0 !important;
+  border: none !important;
+  transition: 100ms ease-in-out !important;
+}
+
+.SinglePalette__edit:hover {
+  color: $primaryColor !important;
+  background-color: transparent !important;
 }
 
 .SinglePalette__colors {
@@ -81,24 +93,6 @@
   .fa-file-download {
     padding: 3px 0px 7px 10px;
   }
-}
-
-.SinglePalette__Edit {
-  font-size: 2em !important;
-  font-weight: $bold !important;
-  color: $darkTextColor !important;
-  margin-top: 0 !important;
-  margin-bottom: 10px !important;
-  transition: 100ms ease-in !important;
-}
-
-.SinglePalette__Edit:hover {
-  background-color: transparent !important;
-  color: rgb(31, 31, 31) !important;
-}
-
-.SinglePalette__edit-link {
-  text-decoration: none !important;
 }
 
 // Mobile

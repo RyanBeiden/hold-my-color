@@ -15,4 +15,11 @@ const getPaletteById = (paletteId) => axios.get(`${baseUrl}/palettes/${paletteId
 
 const addPalette = (newPalette) => axios.post(`${baseUrl}/palettes.json`, newPalette);
 
-export default { getPalettesByUid, getPaletteById, addPalette };
+const updatePalette = (paletteToEdit, newPalette) => axios.put(`${baseUrl}/palettes/${paletteToEdit}.json`, newPalette);
+
+export default {
+  getPalettesByUid,
+  getPaletteById,
+  addPalette,
+  updatePalette,
+};
