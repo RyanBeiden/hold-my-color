@@ -49,12 +49,13 @@ class NewPalette extends React.Component {
 
   savePalette = (e) => {
     e.preventDefault();
-    const { name } = this.state;
+    const { name, githubRepo } = this.state;
     const uid = authData.getUid();
 
     const newPalette = {
       name,
       uid,
+      githubRepo,
     };
 
     paletteData.addPalette(newPalette)

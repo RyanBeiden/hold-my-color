@@ -50,6 +50,19 @@
   text-decoration: none !important;
 }
 
+.SinglePalette__edit {
+  color: $darkTextColor !important;
+  font-size: 30px !important;
+  padding: 0 !important;
+  border: none !important;
+  transition: 100ms ease-in-out !important;
+}
+
+.SinglePalette__edit:hover {
+  color: $primaryColor !important;
+  background-color: transparent !important;
+}
+
 .SinglePalette__colors {
   display: flex;
   justify-content: center;
