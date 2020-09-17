@@ -76,6 +76,8 @@ class SinglePalette extends React.Component {
   render() {
     const { palette, colors, anchorEl } = this.state;
     const newColorLink = `/${this.props.match.params.paletteId}/new-color`;
+    const editPaletteLink = `/palettes/edit/${this.props.match.params.paletteId}`;
+
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
@@ -89,8 +91,8 @@ class SinglePalette extends React.Component {
     return (
       <div className="SinglePalette">
         <div className="SinglePalette__title">
-          <h2>{palette.name}</h2>
-          <Link to={newColorLink} className="SinglePalette__Link"><Button className="SinglePalette__new-button" variant="outlined"><i className="fas fa-plus"></i> New Color</Button></Link>
+          <Link to={editPaletteLink} className="SinglePalette__edit-link"><Button variant="outlined" className="SinglePalette__Edit">{palette.name}</Button></Link>
+          <Link to={newColorLink} className="SinglePalette__new-link"><Button className="SinglePalette__new-button" variant="outlined"><i className="fas fa-plus"></i> New Color</Button></Link>
           <Button className="SinglePalette__new-button" variant="outlined" aria-describedby={id} onClick={this.handleClick}>Convert to SASS <i className="fas fa-random"></i></Button>
           <Popover
             id={id}
