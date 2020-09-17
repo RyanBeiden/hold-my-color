@@ -23,8 +23,8 @@
   grid-template-rows: 1fr 1fr 1fr;
 }
 
-.SinglePalette-new-button {
-  width: 200px !important;
+.SinglePalette__new-button {
+  width: 220px !important;
   margin: auto !important;
   border-width: 2px !important;
   margin-top: 10px !important;
@@ -37,9 +37,13 @@
     padding: 3px 10px 7px 0px;
   }
 
-  .fa-file-export {
+  .fa-random {
     padding: 3px 0px 7px 10px;
   }
+}
+
+.SinglePalette__new-button:hover {
+  background-color: #ebebeb !important;
 }
 
 .SinglePalette__Link {
@@ -53,6 +57,29 @@
   width: 100% !important;
 
   margin-top: 35px;
+}
+
+.SinglePalette__download-text {
+  text-align: left;
+  font-family: monospace;
+  font-size: 1.3em;
+  background-color: #dedede;
+  border-radius: 2px;
+
+  margin: 10px;
+  padding: 15px 15px 50px 15px;
+}
+
+.SinglePalette__download {
+  border-width: 2px !important;
+  border-color: $darkTextColor !important;
+  color: $darkTextColor !important;
+
+  margin: 5px 0px 15px 0px !important;
+
+  .fa-file-download {
+    padding: 3px 0px 7px 10px;
+  }
 }
 
 // Mobile
