@@ -17,9 +17,12 @@ const addColor = (newColor) => axios.post(`${baseUrl}/colors.json`, newColor);
 
 const updateColor = (colorToUpdate, newColor) => axios.put(`${baseUrl}/colors/${colorToUpdate}.json`, newColor);
 
+const deleteColor = (colorId) => axios.delete(`${baseUrl}/colors/${colorId}.json`);
+
 export default {
   getColorsByPaletteId,
   addColor,
   getColorById,
   updateColor,
+  deleteColor,
 };

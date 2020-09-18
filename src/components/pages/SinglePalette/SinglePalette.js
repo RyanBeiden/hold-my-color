@@ -5,6 +5,9 @@ import {
   Button,
   Popover,
   Box,
+  Modal,
+  Fade,
+  Backdrop,
 } from '@material-ui/core';
 
 import paletteData from '../../../helpers/data/paletteData';
@@ -18,6 +21,7 @@ class SinglePalette extends React.Component {
     palette: {},
     colors: [],
     anchorEl: null,
+    openModal: false,
   }
 
   componentDidMount() {
@@ -31,6 +35,14 @@ class SinglePalette extends React.Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
+  };
+
+  handleModalOpen = () => {
+    this.setState({ openModal: true });
+  };
+
+  handleModalClose = () => {
+    this.setState({ openModal: false });
   };
 
   getSinglePalette = () => {
@@ -73,8 +85,25 @@ class SinglePalette extends React.Component {
     return this.download('_colorPalette.scss', colorsToDownload);
   }
 
+  deletePalette = (e) => {
+    e.preventDefault();
+    const { paletteId } = this.props.match.params;
+
+    paletteData.deletePaletteWithColors(paletteId)
+      .then(() => {
+        this.props.history.push('/home');
+      })
+      .catch((err) => console.error('Deleting palette with all its colors did not work -> ', err));
+  }
+
   render() {
-    const { palette, colors, anchorEl } = this.state;
+    const {
+      palette,
+      colors,
+      anchorEl,
+      openModal,
+    } = this.state;
+
     const newColorLink = `/${this.props.match.params.paletteId}/new-color`;
     const editPaletteLink = `/palettes/edit/${this.props.match.params.paletteId}`;
 
@@ -122,6 +151,31 @@ class SinglePalette extends React.Component {
         <div className="SinglePalette__colors">
           {colorCards}
         </div>
+        <Box display="flex" justifyContent="flex-end">
+          <Button className="SinglePalette__delete" variant="outlined" onClick={this.handleModalOpen}>Delete Palette</Button>
+          <Modal
+            className="SinglePalette__modal"
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            open={openModal}
+            onClose={this.handleModalClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={openModal}>
+              <div className="SinglePalette__fade">
+                <h2 id="transition-modal-title">Are you sure you want to delete <br/>this palette and all its colors?</h2>
+                <div className="SinglePalette__delete-container">
+                  <Button className="SinglePalette__cancel" variant="outlined" onClick={this.handleModalClose}>Cancel</Button>
+                  <Button className="SinglePalette__delete" variant="outlined" onClick={this.deletePalette}>Delete</Button>
+                </div>
+              </div>
+            </Fade>
+          </Modal>
+        </Box>
       </div>
     );
   }
