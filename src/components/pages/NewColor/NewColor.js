@@ -33,7 +33,6 @@ class NewColor extends React.Component {
   saveColor = (e) => {
     e.preventDefault();
     const { name, background } = this.state;
-    this.setState({ name: name.split(' ').join('') });
 
     const uid = authData.getUid();
     const paletteId = this.props.match.params;
