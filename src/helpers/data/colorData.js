@@ -11,6 +11,15 @@ const getColorsByPaletteId = (paletteId) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
+const getColorById = (colorId) => axios.get(`${baseUrl}/colors/${colorId}.json`);
+
 const addColor = (newColor) => axios.post(`${baseUrl}/colors.json`, newColor);
 
-export default { getColorsByPaletteId, addColor };
+const updateColor = (colorToUpdate, newColor) => axios.put(`${baseUrl}/colors/${colorToUpdate}.json`, newColor);
+
+export default {
+  getColorsByPaletteId,
+  addColor,
+  getColorById,
+  updateColor,
+};

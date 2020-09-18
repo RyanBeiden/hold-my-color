@@ -81,10 +81,13 @@ class SinglePalette extends React.Component {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
-    const colorCards = colors.map((color) => <ColorCard
-      key={color.id}
-      color={color}
-    />);
+    const colorCards = colors.map((color) => {
+      const editColorLink = `/${this.props.match.params.paletteId}/edit/${color.id}`;
+      return <Link to={editColorLink} key={color.id} className="SinglePalette__Link"><ColorCard
+        key={color.id}
+        color={color}
+      /></Link>;
+    });
 
     const downloadText = colors.map((color) => <p key={color.id}>${color.name}: {color.code};</p>);
 
