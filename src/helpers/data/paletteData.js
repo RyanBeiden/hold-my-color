@@ -2,6 +2,7 @@ import axios from 'axios';
 import apiKeys from '../apiKeys.json';
 
 import utils from '../utils';
+import colorData from './colorData';
 
 const baseUrl = apiKeys.firebaseConfig.databaseURL;
 
@@ -17,9 +18,25 @@ const addPalette = (newPalette) => axios.post(`${baseUrl}/palettes.json`, newPal
 
 const updatePalette = (paletteToEdit, newPalette) => axios.put(`${baseUrl}/palettes/${paletteToEdit}.json`, newPalette);
 
+const deletePalette = (paletteId) => axios.delete(`${baseUrl}/palettes/${paletteId}.json`);
+
+const deletePaletteWithColors = (paletteId) => new Promise((resolve, reject) => {
+  colorData.getColorsByPaletteId(paletteId)
+    .then((colors) => {
+      colors.forEach((color) => {
+        colorData.deleteColor(color.id)
+          .then(() => {
+            resolve(deletePalette(paletteId));
+          });
+      });
+    })
+    .catch((err) => reject(err));
+});
+
 export default {
   getPalettesByUid,
   getPaletteById,
   addPalette,
   updatePalette,
+  deletePaletteWithColors,
 };

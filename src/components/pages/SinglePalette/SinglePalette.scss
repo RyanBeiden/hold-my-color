@@ -3,8 +3,8 @@
 .SinglePalette {
   margin: 0 auto;
   margin-top: 130px;
-  margin-bottom: 50px;
-  padding: 45px 20px;
+  margin-bottom: 5px;
+  padding: 45px 25px 25px 0px;
   max-width: 80%;
   background-color: #fff;
   border-radius: $borderRadius;
@@ -93,6 +93,53 @@
   .fa-file-download {
     padding: 3px 0px 7px 10px;
   }
+}
+
+.SinglePalette__delete {
+  border-width: 2px !important;
+  margin-top: 35px !important;
+  border-color: #cd3a3a !important;
+  color: #cd3a3a !important;
+
+  font-size: 1.1em !important;
+}
+
+.SinglePalette__delete:hover {
+  background-color: #fae5e5 !important;
+}
+
+.SinglePalette__modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SinglePalette__fade {
+  background-color: #fff;
+  border: 2px solid $darkTextColor;
+  border-radius: 2px !important;
+  box-shadow: 0px 1px 5px $darkTextColor; 
+  padding: 20px;
+  outline: 0 !important;
+
+  h2 {
+    font-size: 1.3em !important;
+    color: $darkTextColor !important;
+  }
+}
+
+.SinglePalette__delete-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.SinglePalette__cancel {
+  border-width: 2px !important;
+  margin-top: 35px !important;
+  border-color: $darkTextColor !important;
+  color: $darkTextColor !important;
+
+  font-size: 1.1em !important;
 }
 
 // Mobile
