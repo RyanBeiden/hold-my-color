@@ -3,7 +3,7 @@
 .SinglePalette {
   margin: 0 auto;
   margin-top: 130px;
-  margin-bottom: 50px;
+  margin-bottom: 50px !important;
   padding: 35px 25px 35px 0px;
   max-width: 80%;
   background-color: #fff;
@@ -148,6 +148,7 @@
 @media only screen and (max-width: 600px) {
   .SinglePalette {
     margin-top: -25px;
+    margin-bottom: 50px !important;
     padding: 25px 15px;
   }
 
