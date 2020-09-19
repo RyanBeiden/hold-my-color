@@ -12,7 +12,7 @@
   color: $darkTextColor !important;
 
   h2 {
-    font-size: 35px !important;
+    font-size: 32px !important;
   }
 
   .MuiInput-underline:before {
@@ -32,13 +32,8 @@
 }
 
 .NewColor__form {
-  width: 40%;
+  width: 60%;
   margin: 0 auto;
-}
-
-.NewColor__select {
-  text-align: left !important;
-  margin-top: 10px;
 }
 
 .NewColor__save {
@@ -59,6 +54,7 @@
 .NewColor__picker-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   margin-top: 50px;
 }
 
@@ -79,4 +75,36 @@
 .NewColor__preview-container {
   margin-left: 25px;
   box-shadow: 1px 2px 8px #484848;
+}
+
+// Mobile
+
+@media only screen and (max-width: 620px) {
+  .NewColor {
+    margin-top: -25px;
+    padding: 25px 10px;
+
+    h2 {
+      font-size: 28px !important;
+      margin-bottom: 12px;
+    }
+
+    .MuiInputBase-root,
+    .MuiFormLabel-root {
+      font-size: 1em !important;
+    }
+  }
+
+  .NewColor__form {
+    width: 80%;
+  }
+
+  .NewColor__preview-container {
+    margin-left: 0px;
+    margin-top: 25px;
+  }
+
+  .NewColor__save {
+    margin-top: 35px !important;
+  }
 }

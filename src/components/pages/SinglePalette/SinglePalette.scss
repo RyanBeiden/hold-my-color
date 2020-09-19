@@ -3,8 +3,8 @@
 .SinglePalette {
   margin: 0 auto;
   margin-top: 130px;
-  margin-bottom: 5px;
-  padding: 45px 25px 25px 0px;
+  margin-bottom: 50px;
+  padding: 35px 25px 35px 0px;
   max-width: 80%;
   background-color: #fff;
   border-radius: $borderRadius;
@@ -52,7 +52,8 @@
 
 .SinglePalette__edit {
   color: $darkTextColor !important;
-  font-size: 30px !important;
+  font-size: 33px !important;
+  font-weight: $bold !important;
   padding: 0 !important;
   border: none !important;
   transition: 100ms ease-in-out !important;
@@ -146,7 +147,26 @@
 
 @media only screen and (max-width: 600px) {
   .SinglePalette {
-    margin-top: 50px;
-    padding: 25px 10px;
+    margin-top: -25px;
+    padding: 25px 15px;
+  }
+
+  .SinglePalette__edit {
+    font-size: 28px !important;
+    margin-bottom: 5px !important;
+  }
+
+  .SinglePalette__colors {
+    margin-top: 15px;
+  }
+
+  .SinglePalette__modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .SinglePalette__fade {
+    margin: 0px 10px !important;
   }
 }
