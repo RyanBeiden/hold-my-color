@@ -28,3 +28,25 @@
   padding: 100px;
   margin: 0 !important;
 }
+
+.hide-delete {
+  display: none !important;
+}
+
+.ColorCard__hover:hover .hide-delete {
+  display: block !important;
+  position: absolute !important;
+  right: 1% !important;
+  top: 1% !important;
+  z-index: 5;
+
+  color: #fff !important;
+}
+
+.ColorCard__Link {
+  text-decoration: none !important;
+}
+
+.ColorCard__Link:focus {
+  background-color: #000 !important;
+}

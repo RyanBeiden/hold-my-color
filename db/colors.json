@@ -1,4 +1,10 @@
 {
+  "testColor": {
+    "uid": "12345",
+    "name": "primaryColor",
+    "paletteId": "palette",
+    "code": "#123456"
+  },
   "color1": {
     "uid": "2vjIT3M0eoSL2n3UwOAUX3msv413",
     "name": "primaryColor",
