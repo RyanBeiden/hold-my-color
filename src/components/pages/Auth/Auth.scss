@@ -2,6 +2,7 @@
 
 .Auth {
   margin-top: 150px;
+  margin-bottom: 50px !important;
 
   h2 {
     font-size: 35px !important;
@@ -49,7 +50,7 @@
   text-align: center;
   font-size: 14px;
 
-  margin: 50px 20px 20px 20px;
+  margin: 50px 20px 20px 20px !important;
 }
 
 // Tablet
@@ -60,7 +61,7 @@
   }
 
   .Auth__created-by {
-    bottom: 2%;
+    bottom: 5%;
   }
 }
 
@@ -69,9 +70,10 @@
 @media only screen and (max-width: 590px) {
   .Auth {
     margin-top: 0px;
+    margin-bottom: 50px !important;
 
     h3 {
-      margin: 15px 0px 30px 0px;
+      margin: 15px 0px 30px 0px !important;
       padding: 0px 12px;
     }
   }
