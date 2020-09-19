@@ -50,3 +50,18 @@
 .ColorCard__Link:focus {
   background-color: #000 !important;
 }
+
+// Mobile
+
+@media only screen and (max-width: 768px) {
+  .hide-delete {
+    display: block !important;
+    position: absolute !important;
+    right: 2% !important;
+    top: 2% !important;
+    z-index: 5;
+    font-size: 30px !important;
+  
+    color: #fff !important;
+  }
+}

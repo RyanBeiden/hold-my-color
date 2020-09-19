@@ -175,7 +175,7 @@ class SinglePalette extends React.Component {
           >
             <Fade in={openModal}>
               <div className="SinglePalette__fade">
-                <h2 id="transition-modal-title">Are you sure you want to delete <br/>this palette and all its colors?</h2>
+                <h2 id="transition-modal-title">Are you sure you want to delete this palette and all its colors?</h2>
                 <div className="SinglePalette__delete-container">
                   <Button className="SinglePalette__cancel" variant="outlined" onClick={this.handleModalClose}>Cancel</Button>
                   <Button className="SinglePalette__delete" variant="outlined" onClick={this.deletePalette}>Delete</Button>

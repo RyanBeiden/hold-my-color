@@ -9,12 +9,12 @@
 }
 
 .NewPalette__form {
-  width: 40%;
+  width: 50%;
   margin: 0 auto;
 }
 
 .NewPalette__github {
-  width: 40%;
+  width: 50%;
   margin: 0 auto;
   margin-top: 40px;
 
@@ -35,10 +35,34 @@
   color: $primaryColor !important;
   padding: 3px 25px 2px 25px !important;
   font-size: 1.2em !important;
-  margin-top: 100px !important;
+  margin: 100px 0px 50px 0px !important;
   text-align: center !important;
 }
 
 .NewPalette__save:hover {
   background-color: #ebebeb !important;
+}
+
+// Mobile
+
+@media only screen and (max-width: 600px) {
+  .NewPalette {
+    margin-top: 50px;
+
+    h2 {
+      font-size: 28px !important;
+    }
+  }
+
+  .NewPalette__form {
+    width: 80%;
+  }
+
+  .NewPalette__github {
+    width: 80%;
+
+    h4 {
+      font-size: 1.1em !important;
+    }
+  }
 }
