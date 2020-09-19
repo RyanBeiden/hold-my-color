@@ -8,13 +8,20 @@ import {
   Modal,
   Fade,
   Backdrop,
+  Snackbar,
 } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import paletteData from '../../../helpers/data/paletteData';
 import colorData from '../../../helpers/data/colorData';
 import ColorCard from '../../shared/ColorCard/ColorCard';
+import githubData from '../../../helpers/data/githubData';
 
 import './SinglePalette.scss';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 class SinglePalette extends React.Component {
   state = {
@@ -22,6 +29,8 @@ class SinglePalette extends React.Component {
     colors: [],
     anchorEl: null,
     openModal: false,
+    snackbar: false,
+    issueLink: '',
   }
 
   componentDidMount() {
@@ -29,11 +38,11 @@ class SinglePalette extends React.Component {
     this.getColors();
   }
 
-  handleClick = (e) => {
+  handlePopoverOpen = (e) => {
     this.setState({ anchorEl: e.currentTarget });
   };
 
-  handleClose = () => {
+  handlePopoverClose = () => {
     this.setState({ anchorEl: null });
   };
 
@@ -43,6 +52,17 @@ class SinglePalette extends React.Component {
 
   handleModalClose = () => {
     this.setState({ openModal: false });
+  };
+
+  handleSnackbarOpen = () => {
+    this.setState({ snackbar: true });
+  };
+
+  handleSnackbarClose = (reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ snackbar: false });
   };
 
   getSinglePalette = () => {
@@ -80,7 +100,7 @@ class SinglePalette extends React.Component {
     colors.forEach((color) => {
       const colorName = color.name;
       const colorCode = color.code;
-      colorsToDownload += `$${colorName}: ${colorCode}; `;
+      colorsToDownload += `$${colorName}: ${colorCode};\n`;
     });
     return this.download('_colorPalette.scss', colorsToDownload);
   }
@@ -105,12 +125,30 @@ class SinglePalette extends React.Component {
       .catch((err) => console.error('Could not delete the color -> ', err));
   }
 
+  createIssue = () => {
+    const { palette, colors } = this.state;
+    let bodyText = '';
+
+    colors.forEach((color) => {
+      bodyText += `**${color.name}:** \`${color.code}\`\n`;
+    });
+
+    githubData.addUserIssue(palette.name, bodyText)
+      .then((response) => {
+        this.setState({ issueLink: response });
+      })
+      .then(() => this.setState({ snackbar: true }))
+      .catch((err) => console.error('Nope!', err));
+  }
+
   render() {
     const {
       palette,
       colors,
       anchorEl,
       openModal,
+      snackbar,
+      issueLink,
     } = this.state;
 
     const newColorLink = `/${this.props.match.params.paletteId}/new-color`;
@@ -130,15 +168,38 @@ class SinglePalette extends React.Component {
 
     return (
       <div className="SinglePalette">
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          open={snackbar}
+          autoHideDuration={5000}
+          onClose={this.handleSnackbarClose}
+        >
+          <Alert
+            severity="success"
+            className="SinglePalette__alert"
+            action={
+              <Button color="inherit" size="small" href={issueLink} target="_blank">
+                View Issue
+              </Button>
+            }
+          >Success!
+          </Alert>
+        </Snackbar>
         <div className="SinglePalette__title">
           <Link to={editPaletteLink} className="SinglePalette__Link"><Button variant="outlined" className="SinglePalette__edit">{palette.name}</Button></Link>
-          <Link to={newColorLink} className="SinglePalette__Link"><Button className="SinglePalette__new-button" variant="outlined"><i className="fas fa-plus"></i> New Color</Button></Link>
-          <Button className="SinglePalette__new-button" variant="outlined" aria-describedby={id} onClick={this.handleClick}>Convert to SASS <i className="fas fa-random"></i></Button>
+          <div display="flex" justifycontent="center" flexwrap="flex">
+            <Link to={newColorLink} className="SinglePalette__Link"><Button className="SinglePalette__new-button" variant="outlined"><i className="fas fa-plus"></i> New Color</Button></Link>
+            <Button className="SinglePalette__new-button" variant="outlined" aria-describedby={id} onClick={this.handlePopoverOpen}>Convert to SASS <i className="fas fa-random"></i></Button>
+            <Button className="SinglePalette__new-button" variant="outlined" onClick={this.createIssue}><i className="fab fa-github"></i> Create Issue</Button>
+          </div>
           <Popover
             id={id}
             open={open}
             anchorEl={anchorEl}
-            onClose={this.handleClose}
+            onClose={this.handlePopoverClose}
             anchorOrigin={{
               vertical: 'bottom',
               horizontal: 'center',

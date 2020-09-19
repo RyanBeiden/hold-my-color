@@ -26,7 +26,7 @@ class EditPalette extends React.Component {
     if (githubUser === 'github.com') {
       githubData.getUserRepos()
         .then((response) => {
-          this.setState({ userRepos: response.data, githubUser: true });
+          this.setState({ userRepos: response, githubUser: true });
         })
         .catch((err) => console.error(err));
     }
