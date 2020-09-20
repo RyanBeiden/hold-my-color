@@ -54,6 +54,7 @@
 
 .SinglePalette__Link {
   text-decoration: none !important;
+  align-self: flex-end !important;
 }
 
 .SinglePalette__edit {
@@ -157,6 +158,14 @@
   }
 }
 
+// Tablet
+
+@media only screen and (max-width: 900px) and (min-width: 601px) {
+  .SinglePalette__title {
+    margin-top: -50px !important;
+  }
+}
+
 // Mobile
 
 @media only screen and (max-width: 600px) {
@@ -166,8 +175,12 @@
     padding: 25px 15px;
   }
 
+  .SinglePalette__title {
+    margin-top: -100px !important;
+  }
+
   .SinglePalette__edit {
-    font-size: 28px !important;
+    font-size: 1.5em !important;
     margin-bottom: 5px !important;
   }
 

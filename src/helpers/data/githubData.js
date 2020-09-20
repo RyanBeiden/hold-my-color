@@ -54,9 +54,8 @@ async function addUserIssue(usernameRepo, bodyText) {
   });
 
   const result = await response.json();
-  const anchor = document.createElement('a');
-  anchor.href = result.html_url;
-  return anchor;
+  const href = result.html_url;
+  return href;
 }
 
 export default { getUserRepos, addUserIssue };

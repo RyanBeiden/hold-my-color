@@ -87,3 +87,7 @@ select {
   font-family: $primaryFont !important;
   font-size: 1em !important;
 }
+
+.MuiPaper-elevation8 {
+  border-radius: $borderRadius !important;
+}

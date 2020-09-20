@@ -18,6 +18,7 @@ import './PaletteCard.scss';
 class PaletteCard extends React.Component {
   state = {
     colorsToPreview: [],
+    newName: '',
   }
 
   static propTypes = {
@@ -26,6 +27,7 @@ class PaletteCard extends React.Component {
 
   componentDidMount() {
     this.getColorPreview();
+    this.removeUsername();
   }
 
   getColorPreview = () => {
@@ -42,8 +44,25 @@ class PaletteCard extends React.Component {
       .catch((err) => console.error(err));
   }
 
+  removeUsername = () => {
+    const { palette } = this.props;
+    let num = 0;
+
+    if (palette.githubRepo) {
+      const newNameArray = palette.name.split('');
+      for (let i = 0; i < newNameArray.length; i += 1) {
+        num += 1;
+        if (newNameArray[i] === '/') {
+          const newName = newNameArray.splice(num, newNameArray.length);
+          return this.setState({ newName: newName.join('') });
+        }
+      }
+    }
+    return null;
+  }
+
   render() {
-    const { colorsToPreview } = this.state;
+    const { colorsToPreview, newName } = this.state;
     const { palette } = this.props;
 
     const paletteLink = `/palettes/${palette.id}`;
@@ -59,7 +78,10 @@ class PaletteCard extends React.Component {
             <Link to={paletteLink} className="CardPalette__link">
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h3">
-                  {palette.name}
+                  {palette.githubRepo
+                    ? newName
+                    : palette.name
+                  }
                 </Typography>
                 <Divider />
                 <Box display="flex" justifyContent="center">

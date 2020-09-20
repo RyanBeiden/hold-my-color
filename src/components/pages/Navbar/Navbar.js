@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import {
@@ -40,7 +41,7 @@ class Navbar extends React.Component {
       <div className="Navbar">
         {authed
           ? <nav>
-              <h1 className="Navbar__logo">Hold My Color</h1>
+              <Link to="/home" className="Navbar__logo"><h1>Hold My Color</h1></Link>
               <Button className="Navbar__icon" aria-describedby={id} onClick={this.handleClick}><MenuRoundedIcon /></Button>
               <Popover
                 id={id}
@@ -57,17 +58,17 @@ class Navbar extends React.Component {
                 }}
               >
                 <Box className="Navbar__menu-content">
-                  <div className="Navbar__sign-in">
-                    <Button variant="contained">Palettes</Button>
+                  <div className="Navbar__palettes">
+                    <Link to="/home" className="Navbar__link"><Button variant="contained" className="Navbar__button">Palettes</Button></Link>
                   </div>
                   <div className="Navbar__login">
-                    <Button variant="contained" onClick={this.signOut}>Logout</Button>
+                    <Button variant="contained" onClick={this.signOut} className="Navbar__button">Logout</Button>
                   </div>
                 </Box>
               </Popover>
             </nav>
           : <nav>
-              <h1 className="Navbar__logo">Hold My Color</h1>
+              <Link to="/home" className="Navbar__link"><h1 className="Navbar__logo">Hold My Color</h1></Link>
             </nav>
           }
         <svg className="Navbar__wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

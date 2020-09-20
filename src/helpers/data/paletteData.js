@@ -23,12 +23,16 @@ const deletePalette = (paletteId) => axios.delete(`${baseUrl}/palettes/${palette
 const deletePaletteWithColors = (paletteId) => new Promise((resolve, reject) => {
   colorData.getColorsByPaletteId(paletteId)
     .then((colors) => {
-      colors.forEach((color) => {
-        colorData.deleteColor(color.id)
-          .then(() => {
-            resolve(deletePalette(paletteId));
-          });
-      });
+      if (colors.length > 0) {
+        colors.forEach((color) => {
+          colorData.deleteColor(color.id)
+            .then(() => {
+              resolve(deletePalette(paletteId));
+            });
+        });
+      } else {
+        resolve(deletePalette(paletteId));
+      }
     })
     .catch((err) => reject(err));
 });

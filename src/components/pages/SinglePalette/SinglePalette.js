@@ -135,10 +135,12 @@ class SinglePalette extends React.Component {
 
     githubData.addUserIssue(palette.name, bodyText)
       .then((response) => {
-        this.setState({ issueLink: response });
+        this.setState({ issueLink: response, snackbar: true });
       })
-      .then(() => this.setState({ snackbar: true }))
-      .catch((err) => console.error('Nope!', err));
+      .catch((err) => {
+        this.setState({ snackbar: false });
+        console.error('Could not create a Github issue -> ', err);
+      });
   }
 
   render() {
@@ -168,32 +170,41 @@ class SinglePalette extends React.Component {
 
     return (
       <div className="SinglePalette">
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-          open={snackbar}
-          autoHideDuration={5000}
-          onClose={this.handleSnackbarClose}
-        >
-          <Alert
-            severity="success"
-            className="SinglePalette__alert"
-            action={
-              <Button color="inherit" size="small" href={issueLink} target="_blank">
-                View Issue
-              </Button>
-            }
-          >Success!
-          </Alert>
-        </Snackbar>
+        {palette.githubRepo
+          ? <Snackbar
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+              open={snackbar}
+              autoHideDuration={5000}
+              onClose={this.handleSnackbarClose}
+            >
+              <Alert
+                severity="success"
+                className="SinglePalette__alert"
+                action={
+                  <Button color="inherit" size="small" href={issueLink} target="_blank">
+                    View Issue
+                  </Button>
+                }
+              >Success!
+              </Alert>
+            </Snackbar>
+          : ''
+        }
         <div className="SinglePalette__title">
           <Link to={editPaletteLink} className="SinglePalette__Link"><Button variant="outlined" className="SinglePalette__edit">{palette.name}</Button></Link>
           <div display="flex" justifycontent="center" flexwrap="flex">
             <Link to={newColorLink} className="SinglePalette__Link"><Button className="SinglePalette__new-button" variant="outlined"><i className="fas fa-plus"></i> New Color</Button></Link>
-            <Button className="SinglePalette__new-button" variant="outlined" aria-describedby={id} onClick={this.handlePopoverOpen}>Convert to SASS <i className="fas fa-random"></i></Button>
-            <Button className="SinglePalette__new-button" variant="outlined" onClick={this.createIssue}><i className="fab fa-github"></i> Create Issue</Button>
+            {colors.length > 0
+              ? <Button className="SinglePalette__new-button" variant="outlined" aria-describedby={id} onClick={this.handlePopoverOpen}>Convert to SASS <i className="fas fa-random"></i></Button>
+              : ''
+            }
+            {palette.githubRepo && colors.length > 0
+              ? <Button className="SinglePalette__new-button" variant="outlined" onClick={this.createIssue}><i className="fab fa-github"></i> Create Issue</Button>
+              : ''
+            }
           </div>
           <Popover
             id={id}
