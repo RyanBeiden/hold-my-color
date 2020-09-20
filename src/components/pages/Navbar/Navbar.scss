@@ -20,8 +20,9 @@ nav {
   z-index: 1;
 
   text-align: left;
-  font-size: 35px;
+  font-size: 24px;
   color: $primaryColor;
+  text-decoration: none !important;
 
   margin: 35px 0px 0px 35px;
 }
@@ -40,17 +41,31 @@ nav {
   border-radius: $borderRadius !important;
   border: 2px solid $primaryColor !important;
 
+
   margin: 0 !important;
   padding: 0 !important;
 }
 
-.Navbar__sign-in {
+.Navbar__button {
+  font-family: $primaryFont !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+  padding: 6px 20px 4px 20px !important;
+  border-radius: 1px !important;
+}
+
+.Navbar__link {
+  text-decoration: none !important;
+}
+
+.Navbar__palettes {
   text-align: center !important;
   border-bottom: 2px solid $primaryColor !important;
 }
 
 .Navbar__login {
   text-align: center !important;
+  font-family: $primaryFont !important;
 }
 
 

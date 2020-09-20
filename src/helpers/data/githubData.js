@@ -18,9 +18,44 @@ const getUserRepos = () => new Promise((resolve, reject) => {
           Accept: 'application/vnd.github.v3+json',
         },
       })
-        .then((repoResponse) => resolve(repoResponse));
+        .then((repoResponse) => {
+          const repoArray = repoResponse.data;
+          const newRepoArray = [];
+
+          repoArray.forEach((repo) => {
+            newRepoArray.push({
+              name: `${username}/${repo.name}`,
+              id: repo.id,
+            });
+          });
+          resolve(newRepoArray);
+        });
     })
     .catch((err) => reject(err));
 });
 
-export default { getUserRepos };
+async function addUserIssue(usernameRepo, bodyText) {
+  const accessToken = localStorage.getItem('token');
+  const url = `https://api.github.com/repos/${usernameRepo}/issues`;
+
+  const headers = {
+    Authorization: `Token ${accessToken}`,
+  };
+
+  const payLoad = {
+    title: 'Style Guide',
+    body: bodyText,
+  };
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(payLoad),
+  });
+
+  const result = await response.json();
+  const href = result.html_url;
+  return href;
+}
+
+export default { getUserRepos, addUserIssue };
