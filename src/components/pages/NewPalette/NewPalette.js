@@ -113,7 +113,7 @@ class NewPalette extends React.Component {
               ? <>
                 <h4>Link an existing Github repository</h4>
                 <div className="NewPalette__select">
-                  <select onChange={this.handleRepoEvent}>
+                  <select onChange={this.handleRepoEvent} className="NewPalette__select-box">
                     <option>Select a repo</option>
                     {repoOptions}
                   </select>

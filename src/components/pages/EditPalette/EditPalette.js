@@ -123,8 +123,9 @@ class EditPalette extends React.Component {
           : <div className="NewPalette__github">
             {githubUser
               ? <>
+                <h4>Link an existing Github repository</h4>
                 <div className="EditPalette__select">
-                  <select onChange={this.handleRepoEvent} value={dropValue()}>
+                  <select onChange={this.handleRepoEvent} value={dropValue()} className="EditPalette__select-box">
                     <option>Select a repo</option>
                     {repoOptions}
                   </select>
