@@ -8,6 +8,7 @@ import {
   InputLabel,
   Input,
 } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 import colorData from '../../../helpers/data/colorData';
 import authData from '../../../helpers/data/authData';
@@ -18,6 +19,7 @@ class EditColor extends React.Component {
   state = {
     name: '',
     background: '',
+    loading: true,
   }
 
   componentDidMount() {
@@ -25,6 +27,7 @@ class EditColor extends React.Component {
 
     colorData.getColorById(colorId)
       .then((response) => this.setState({ name: response.data.name, background: response.data.code }))
+      .then(() => this.setState({ loading: false }))
       .catch((err) => console.error('Could not get the color by its id ->', err));
   }
 
@@ -60,33 +63,42 @@ class EditColor extends React.Component {
   }
 
   render() {
-    const { name, background } = this.state;
+    const { name, background, loading } = this.state;
 
     return (
       <div className="EditColor">
         <h2>Edit Color</h2>
-        <FormControl className="EditColor__form">
-          <InputLabel htmlFor="colorName">Color Name</InputLabel>
-          <Input
-            id="colorName"
-            aria-describedby="my-helper-text"
-            onChange={this.changeNameEvent}
-            value={name}
-          />
-        </FormControl>
-        <Box className="EditColor__picker-container">
-          <Chrome
-            color={background}
-            onChange={this.handleColorChange}
-          />
-          <div className="EditColor__preview-container">
-            <div className="EditColor__preview" style={{ backgroundColor: background }}></div>
-            <div className="EditColor__preview-name">{name}</div>
+        {loading
+          ? <>
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            </>
+          : <>
+          <FormControl className="EditColor__form">
+            <InputLabel htmlFor="colorName">Color Name</InputLabel>
+            <Input
+              id="colorName"
+              aria-describedby="my-helper-text"
+              onChange={this.changeNameEvent}
+              value={name}
+            />
+          </FormControl>
+          <Box className="EditColor__picker-container">
+            <Chrome
+              color={background}
+              onChange={this.handleColorChange}
+            />
+            <div className="EditColor__preview-container">
+              <div className="EditColor__preview" style={{ backgroundColor: background }}></div>
+              <div className="EditColor__preview-name">{name}</div>
+            </div>
+          </Box>
+          <div className="EditColor__button">
+            <Button variant="outlined" className="EditColor__update" onClick={this.updateColor}>Update</Button>
           </div>
-        </Box>
-        <div className="EditColor__button">
-          <Button variant="outlined" className="EditColor__update" onClick={this.updateColor}>Update</Button>
-        </div>
+        </>
+        }
       </div>
     );
   }

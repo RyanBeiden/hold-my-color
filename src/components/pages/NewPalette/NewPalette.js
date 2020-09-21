@@ -5,6 +5,7 @@ import {
   InputLabel,
   Input,
   Button,
+  CircularProgress,
 } from '@material-ui/core';
 
 import paletteData from '../../../helpers/data/paletteData';
@@ -19,6 +20,7 @@ class NewPalette extends React.Component {
     githubRepo: false,
     githubUser: false,
     userRepos: [],
+    loading: true,
   }
 
   componentDidMount() {
@@ -28,6 +30,7 @@ class NewPalette extends React.Component {
         .then((response) => {
           this.setState({ userRepos: response, githubUser: true });
         })
+        .then(() => this.setState({ loading: false }))
         .catch((err) => console.error(err));
     }
   }
@@ -71,6 +74,7 @@ class NewPalette extends React.Component {
       githubRepo,
       githubUser,
       userRepos,
+      loading,
     } = this.state;
 
     const repoOptions = userRepos.map((repo) => <option
@@ -90,17 +94,24 @@ class NewPalette extends React.Component {
             value={name}
           />
         </FormControl>
-        {githubUser
-          ? <div className="NewPalette__github">
-            <h4>Link an existing Github repository</h4>
-            <div className="NewPalette__select">
-              <select onChange={this.handleRepoEvent}>
-                <option>Select a repo</option>
-                {repoOptions}
-              </select>
+        {loading
+          ? <div className="App__progress">
+              <CircularProgress className="App__circle" />
             </div>
-          </div>
-          : ''
+          : <div className="NewPalette__github">
+            {githubUser
+              ? <>
+                <h4>Link an existing Github repository</h4>
+                <div className="NewPalette__select">
+                  <select onChange={this.handleRepoEvent}>
+                    <option>Select a repo</option>
+                    {repoOptions}
+                  </select>
+                </div>
+                </>
+              : ''
+            }
+            </div>
         }
         <div className="NewPalette__button">
           <Button variant="outlined" className="NewPalette__save" onClick={this.savePalette}>Save</Button>
