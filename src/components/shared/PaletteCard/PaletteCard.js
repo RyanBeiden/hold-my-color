@@ -8,6 +8,7 @@ import {
   CardContent,
   Divider,
   Box,
+  CircularProgress,
 } from '@material-ui/core';
 
 import paletteShape from '../../../helpers/props/paletteShape';
@@ -19,6 +20,7 @@ class PaletteCard extends React.Component {
   state = {
     colorsToPreview: [],
     newName: '',
+    loading: true,
   }
 
   static propTypes = {
@@ -41,6 +43,7 @@ class PaletteCard extends React.Component {
           this.setState({ colorsToPreview: newColorArray });
         });
       })
+      .then(() => this.setState({ loading: false }))
       .catch((err) => console.error(err));
   }
 
@@ -62,7 +65,7 @@ class PaletteCard extends React.Component {
   }
 
   render() {
-    const { colorsToPreview, newName } = this.state;
+    const { colorsToPreview, newName, loading } = this.state;
     const { palette } = this.props;
 
     const paletteLink = `/palettes/${palette.id}`;
@@ -79,13 +82,18 @@ class PaletteCard extends React.Component {
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h3">
                   {palette.githubRepo
-                    ? newName
+                    ? <><div><i className="fab fa-github"></i>{newName}</div></>
                     : palette.name
                   }
                 </Typography>
                 <Divider />
                 <Box display="flex" justifyContent="center">
-                  {colorPreviews}
+                  {loading
+                    ? <div className="App__progress">
+                        <CircularProgress className="App__circle" />
+                      </div>
+                    : colorPreviews
+                  }
                 </Box>
               </CardContent>
             </Link>
