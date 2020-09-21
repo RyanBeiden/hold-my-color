@@ -11,6 +11,7 @@ import {
   Snackbar,
 } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 import paletteData from '../../../helpers/data/paletteData';
 import colorData from '../../../helpers/data/colorData';
@@ -31,6 +32,7 @@ class SinglePalette extends React.Component {
     openModal: false,
     snackbar: false,
     issueLink: '',
+    loading: true,
   }
 
   componentDidMount() {
@@ -78,6 +80,7 @@ class SinglePalette extends React.Component {
 
     colorData.getColorsByPaletteId(paletteId)
       .then((colors) => this.setState({ colors }))
+      .then(() => this.setState({ loading: false }))
       .catch((err) => console.error('Getting the colors by the palette id did not work -> ', err));
   }
 
@@ -151,6 +154,7 @@ class SinglePalette extends React.Component {
       openModal,
       snackbar,
       issueLink,
+      loading,
     } = this.state;
 
     const newColorLink = `/${this.props.match.params.paletteId}/new-color`;
@@ -170,92 +174,101 @@ class SinglePalette extends React.Component {
 
     return (
       <div className="SinglePalette">
-        {palette.githubRepo
-          ? <Snackbar
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-              open={snackbar}
-              autoHideDuration={5000}
-              onClose={this.handleSnackbarClose}
-            >
-              <Alert
-                severity="success"
-                className="SinglePalette__alert"
-                action={
-                  <Button color="inherit" size="small" href={issueLink} target="_blank">
-                    View Issue
-                  </Button>
+        {loading
+          ? <>
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            </>
+          : <>
+            {palette.githubRepo
+              ? <Snackbar
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                  }}
+                  open={snackbar}
+                  autoHideDuration={5000}
+                  onClose={this.handleSnackbarClose}
+                >
+                  <Alert
+                    severity="success"
+                    className="SinglePalette__alert"
+                    action={
+                      <Button color="inherit" size="small" href={issueLink} target="_blank">
+                        View Issue
+                      </Button>
+                    }
+                  >Success!
+                  </Alert>
+                </Snackbar>
+              : ''
+            }
+            <div className="SinglePalette__title">
+              <Link to={editPaletteLink} className="SinglePalette__Link"><Button variant="outlined" className="SinglePalette__edit">{palette.name}</Button></Link>
+              <div display="flex" justifycontent="center" flexwrap="flex">
+                <Link to={newColorLink} className="SinglePalette__Link"><Button className="SinglePalette__new-button" variant="outlined"><i className="fas fa-plus"></i> New Color</Button></Link>
+                {colors.length > 0
+                  ? <Button className="SinglePalette__new-button" variant="outlined" aria-describedby={id} onClick={this.handlePopoverOpen}>Convert to SASS <i className="fas fa-random"></i></Button>
+                  : ''
                 }
-              >Success!
-              </Alert>
-            </Snackbar>
-          : ''
-        }
-        <div className="SinglePalette__title">
-          <Link to={editPaletteLink} className="SinglePalette__Link"><Button variant="outlined" className="SinglePalette__edit">{palette.name}</Button></Link>
-          <div display="flex" justifycontent="center" flexwrap="flex">
-            <Link to={newColorLink} className="SinglePalette__Link"><Button className="SinglePalette__new-button" variant="outlined"><i className="fas fa-plus"></i> New Color</Button></Link>
-            {colors.length > 0
-              ? <Button className="SinglePalette__new-button" variant="outlined" aria-describedby={id} onClick={this.handlePopoverOpen}>Convert to SASS <i className="fas fa-random"></i></Button>
-              : ''
-            }
-            {palette.githubRepo && colors.length > 0
-              ? <Button className="SinglePalette__new-button" variant="outlined" onClick={this.createIssue}><i className="fab fa-github"></i> Create Issue</Button>
-              : ''
-            }
-          </div>
-          <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={this.handlePopoverClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
-            }}
-          >
-            <div className="SinglePalette__download-text">
-              {downloadText}
-            </div>
-            <Box display="flex" justifyContent="center">
-              <Button className="SinglePalette__download" variant="outlined" onClick={this.downloadSass}>Download <i className="fas fa-file-download"></i></Button>
-            </Box>
-          </Popover>
-        </div>
-        <div className="SinglePalette__colors">
-          {colorCards}
-        </div>
-        <Box display="flex" justifyContent="flex-end">
-          <Button className="SinglePalette__delete" variant="outlined" onClick={this.handleModalOpen}>Delete Palette</Button>
-          <Modal
-            className="SinglePalette__modal"
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            open={openModal}
-            onClose={this.handleModalClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={openModal}>
-              <div className="SinglePalette__fade">
-                <h2 id="transition-modal-title">Are you sure you want to delete this palette and all its colors?</h2>
-                <div className="SinglePalette__delete-container">
-                  <Button className="SinglePalette__cancel" variant="outlined" onClick={this.handleModalClose}>Cancel</Button>
-                  <Button className="SinglePalette__delete" variant="outlined" onClick={this.deletePalette}>Delete</Button>
-                </div>
+                {palette.githubRepo && colors.length > 0
+                  ? <Button className="SinglePalette__new-button" variant="outlined" onClick={this.createIssue}><i className="fab fa-github"></i> Create Issue</Button>
+                  : ''
+                }
               </div>
-            </Fade>
-          </Modal>
-        </Box>
+              <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={this.handlePopoverClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                <div className="SinglePalette__download-text">
+                  {downloadText}
+                </div>
+                <Box display="flex" justifyContent="center">
+                  <Button className="SinglePalette__download" variant="outlined" onClick={this.downloadSass}>Download <i className="fas fa-file-download"></i></Button>
+                </Box>
+              </Popover>
+            </div>
+            <div className="SinglePalette__colors">
+              {colorCards}
+            </div>
+            <Box display="flex" justifyContent="flex-end">
+              <Button className="SinglePalette__delete" variant="outlined" onClick={this.handleModalOpen}>Delete Palette</Button>
+              <Modal
+                className="SinglePalette__modal"
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={openModal}
+                onClose={this.handleModalClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500,
+                }}
+              >
+                <Fade in={openModal}>
+                  <div className="SinglePalette__fade">
+                    <h2 id="transition-modal-title">Are you sure you want to delete this palette and all its colors?</h2>
+                    <div className="SinglePalette__delete-container">
+                      <Button className="SinglePalette__cancel" variant="outlined" onClick={this.handleModalClose}>Cancel</Button>
+                      <Button className="SinglePalette__delete" variant="outlined" onClick={this.deletePalette}>Delete</Button>
+                    </div>
+                  </div>
+                </Fade>
+              </Modal>
+            </Box>
+          </>
+        }
       </div>
     );
   }

@@ -8,6 +8,8 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import connection from '../helpers/data/connection';
 import Auth from '../components/pages/Auth/Auth';
 import Navbar from '../components/pages/Navbar/Navbar';
@@ -38,7 +40,7 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 
 class App extends React.Component {
   state = {
-    authed: false,
+    authed: null,
   }
 
   componentDidMount() {
@@ -56,23 +58,28 @@ class App extends React.Component {
 
     return (
       <div className='App'>
-        <BrowserRouter>
-          <React.Fragment>
-            <Navbar authed={authed} />
-            <div className="route-container">
-              <Switch>
-                <PrivateRoute path="/home" component={Home} authed={authed} />
-                <PrivateRoute path="/palettes/edit/:paletteId" component={EditPalette} authed={authed} />
-                <PrivateRoute path="/:paletteId/edit/:colorId" component={EditColor} authed={authed} />
-                <PrivateRoute path="/palettes/:paletteId" component={SinglePalette} authed={authed} />
-                <PrivateRoute path="/new-palette" component={NewPalette} authed={authed} />
-                <PrivateRoute path="/:paletteId/new-color" component={NewColor} authed={authed} />
-                <PublicRoute path="/auth" component={Auth} authed={authed} />
-                <Redirect from="*" to="/home" />
-              </Switch>
+        {authed === null
+          ? <div className="App__progress">
+              <CircularProgress className="App__circle" />
             </div>
-          </React.Fragment>
-        </BrowserRouter>
+          : <BrowserRouter>
+              <React.Fragment>
+                <Navbar authed={authed} />
+                <div className="route-container">
+                  <Switch>
+                    <PrivateRoute path="/home" component={Home} authed={authed} />
+                    <PrivateRoute path="/palettes/edit/:paletteId" component={EditPalette} authed={authed} />
+                    <PrivateRoute path="/:paletteId/edit/:colorId" component={EditColor} authed={authed} />
+                    <PrivateRoute path="/palettes/:paletteId" component={SinglePalette} authed={authed} />
+                    <PrivateRoute path="/new-palette" component={NewPalette} authed={authed} />
+                    <PrivateRoute path="/:paletteId/new-color" component={NewColor} authed={authed} />
+                    <PublicRoute path="/auth" component={Auth} authed={authed} />
+                    <Redirect from="*" to="/home" />
+                  </Switch>
+                </div>
+              </React.Fragment>
+            </BrowserRouter>
+        }
       </div>
     );
   }

@@ -24,6 +24,18 @@ h3 {
   font-weight: $light;
 }
 
+.App__progress {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App__circle {
+  color: #fff !important;
+  font-size: large !important;
+}
+
 .MuiTypography-root {
   font-family: $primaryFont !important;
 }
