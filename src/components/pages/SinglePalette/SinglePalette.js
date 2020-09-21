@@ -176,9 +176,9 @@ class SinglePalette extends React.Component {
       <div className="SinglePalette">
         {loading
           ? <>
-            <Skeleton animation="wave" />
-            <Skeleton animation="wave" />
-            <Skeleton animation="wave" />
+              <Skeleton animation="wave" height={50} />
+              <Skeleton animation="wave" height={50} />
+              <Skeleton animation="wave" height={50} />
             </>
           : <>
             {palette.githubRepo

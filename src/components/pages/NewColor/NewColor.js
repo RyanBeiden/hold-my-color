@@ -1,5 +1,6 @@
 import React from 'react';
 import Chrome from 'react-color';
+import { Link } from 'react-router-dom';
 
 import {
   FormControl,
@@ -18,12 +19,16 @@ class NewColor extends React.Component {
   state = {
     name: '',
     background: '#BE85E0',
+    validated: true,
   }
 
   changeNameEvent = (e) => {
     e.preventDefault();
     const noSpacedValue = e.target.value.replace(/\s/g, '');
     this.setState({ name: noSpacedValue });
+    if (e.target.value !== '') {
+      this.setState({ validated: true });
+    }
   }
 
   handleColorChange = (color) => {
@@ -37,31 +42,38 @@ class NewColor extends React.Component {
     const uid = authData.getUid();
     const paletteId = this.props.match.params;
 
-    const newColor = {
-      name,
-      code: background,
-      uid,
-      paletteId: paletteId.paletteId,
-    };
+    if (name === '') {
+      this.setState({ validated: false });
+    } else {
+      const newColor = {
+        name,
+        code: background,
+        uid,
+        paletteId: paletteId.paletteId,
+      };
 
-    colorData.addColor(newColor)
-      .then(() => {
-        this.props.history.push(`/palettes/${paletteId.paletteId}`);
-      })
-      .catch((err) => console.error('Adding the new color did not work -> ', err));
+      colorData.addColor(newColor)
+        .then(() => {
+          this.props.history.push(`/palettes/${paletteId.paletteId}`);
+        })
+        .catch((err) => console.error('Adding the new color did not work -> ', err));
+    }
   }
 
   render() {
     const {
       name,
       background,
+      validated,
     } = this.state;
+
+    const backLink = `/palettes/${this.props.match.params.paletteId}`;
 
     return (
       <div className="NewColor">
         <h2>New Color</h2>
         <FormControl className="NewColor__form">
-          <InputLabel htmlFor="colorName">Color Name</InputLabel>
+          <InputLabel htmlFor="colorName">{validated ? 'Color Name' : <div className="validation">Please enter a name</div>}</InputLabel>
           <Input
             id="colorName"
             aria-describedby="my-helper-text"
@@ -80,6 +92,7 @@ class NewColor extends React.Component {
           </div>
         </Box>
         <div className="NewColor__button">
+          <Link to={backLink} className="cancel-link"><Button variant="outlined" className="cancel-color">Cancel</Button></Link>
           <Button variant="outlined" className="NewColor__save" onClick={this.saveColor}>Save</Button>
         </div>
       </div>

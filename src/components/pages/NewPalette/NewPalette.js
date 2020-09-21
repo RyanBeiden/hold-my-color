@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   FormControl,
@@ -21,6 +22,7 @@ class NewPalette extends React.Component {
     githubUser: false,
     userRepos: [],
     loading: true,
+    validated: true,
   }
 
   componentDidMount() {
@@ -38,6 +40,9 @@ class NewPalette extends React.Component {
   changeNameEvent = (e) => {
     e.preventDefault();
     this.setState({ name: e.target.value });
+    if (e.target.value !== '') {
+      this.setState({ validated: true });
+    }
   }
 
   handleRepoEvent = (e) => {
@@ -55,17 +60,21 @@ class NewPalette extends React.Component {
     const { name, githubRepo } = this.state;
     const uid = authData.getUid();
 
-    const newPalette = {
-      name,
-      uid,
-      githubRepo,
-    };
+    if (name === '') {
+      this.setState({ validated: false });
+    } else {
+      const newPalette = {
+        name,
+        uid,
+        githubRepo,
+      };
 
-    paletteData.addPalette(newPalette)
-      .then((response) => {
-        this.props.history.push(`/palettes/${response.data.name}`);
-      })
-      .catch((err) => console.error('Adding the new palette did not work -> ', err));
+      paletteData.addPalette(newPalette)
+        .then((response) => {
+          this.props.history.push(`/palettes/${response.data.name}`);
+        })
+        .catch((err) => console.error('Adding the new palette did not work -> ', err));
+    }
   }
 
   render() {
@@ -75,6 +84,7 @@ class NewPalette extends React.Component {
       githubUser,
       userRepos,
       loading,
+      validated,
     } = this.state;
 
     const repoOptions = userRepos.map((repo) => <option
@@ -86,7 +96,7 @@ class NewPalette extends React.Component {
       <div className="NewPalette">
         <h2>New Palette</h2>
         <FormControl className="NewPalette__form" disabled={!!githubRepo}>
-          <InputLabel htmlFor="paletteName">Palette Name</InputLabel>
+          <InputLabel htmlFor="paletteName">{validated ? 'Palette Name' : <div className="validation">Please enter a name</div>}</InputLabel>
           <Input
             id="paletteName"
             aria-describedby="my-helper-text"
@@ -114,6 +124,7 @@ class NewPalette extends React.Component {
             </div>
         }
         <div className="NewPalette__button">
+          <Link to="/home" className="cancel-link"><Button variant="outlined" className="cancel-palette">Cancel</Button></Link>
           <Button variant="outlined" className="NewPalette__save" onClick={this.savePalette}>Save</Button>
         </div>
       </div>
