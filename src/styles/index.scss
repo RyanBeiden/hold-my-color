@@ -103,3 +103,42 @@ select {
 .MuiPaper-elevation8 {
   border-radius: $borderRadius !important;
 }
+
+.validation {
+  color: #ff5555 !important;
+  font-weight: $bold !important;
+}
+
+.cancel-palette {
+  background-color: $textColor !important;
+  color: $primaryColor !important;
+  padding: 3px 25px 2px 25px !important;
+  font-size: 1.2em !important;
+  margin: 100px 20px 50px 0px !important;
+  text-align: center !important;
+}
+
+.cancel-palette:hover {
+  background-color: #ebebeb !important;
+}
+
+.cancel-color {
+  border-color: $darkTextColor !important;
+  color: $darkTextColor !important;
+  padding: 3px 25px 2px 25px !important;
+  font-size: 1.2em !important;
+  margin-top: 60px !important;
+  margin-right: 20px !important;
+  margin-left: 0px !important;
+  text-align: center !important;
+  border-width: 2px !important;
+}
+
+.cancel-color:hover {
+  background-color: #ebebeb !important;
+  border-width: 2px !important;
+}
+
+.cancel-link {
+  text-decoration: none !important;
+}

@@ -68,7 +68,7 @@ class Navbar extends React.Component {
               </Popover>
             </nav>
           : <nav>
-              <Link to="/home" className="Navbar__link"><h1 className="Navbar__logo">Hold My Color</h1></Link>
+              <Link to="/home" className="Navbar__logo"><h1>Hold My Color</h1></Link>
             </nav>
           }
         <svg className="Navbar__wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

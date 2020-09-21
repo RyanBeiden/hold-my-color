@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import {
@@ -17,6 +18,7 @@ import './ColorCard.scss';
 class ColorCard extends React.Component {
   static propTypes = {
     color: colorShape.colorShape,
+    deleteThisColor: PropTypes.func.isRequired,
   }
 
   deleteColorEvent = (e) => {

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import {
   FormControl,
   Input,
@@ -20,6 +22,7 @@ class EditPalette extends React.Component {
     githubUser: false,
     userRepos: [],
     loading: true,
+    validated: true,
   }
 
   componentDidMount() {
@@ -44,6 +47,9 @@ class EditPalette extends React.Component {
   changeNameEvent = (e) => {
     e.preventDefault();
     this.setState({ name: e.target.value });
+    if (e.target.value !== '') {
+      this.setState({ validated: true });
+    }
   }
 
   handleRepoEvent = (e) => {
@@ -63,17 +69,21 @@ class EditPalette extends React.Component {
     const uid = authData.getUid();
     const { paletteId } = this.props.match.params;
 
-    const updatedPalette = {
-      name,
-      uid,
-      githubRepo,
-    };
+    if (name === '') {
+      this.setState({ validated: false });
+    } else {
+      const updatedPalette = {
+        name,
+        uid,
+        githubRepo,
+      };
 
-    paletteData.updatePalette(paletteId, updatedPalette)
-      .then(() => {
-        this.props.history.push(`/palettes/${paletteId}`);
-      })
-      .catch((err) => console.error('Updating the palette did not work -> ', err));
+      paletteData.updatePalette(paletteId, updatedPalette)
+        .then(() => {
+          this.props.history.push(`/palettes/${paletteId}`);
+        })
+        .catch((err) => console.error('Updating the palette did not work -> ', err));
+    }
   }
 
   render() {
@@ -83,6 +93,7 @@ class EditPalette extends React.Component {
       githubUser,
       userRepos,
       loading,
+      validated,
     } = this.state;
 
     const repoOptions = userRepos.map((repo) => <option
@@ -91,12 +102,13 @@ class EditPalette extends React.Component {
     >{repo.name}</option>);
 
     const dropValue = () => (githubRepo ? `${name}` : 'Select a repo');
+    const backLink = `/palettes/${this.props.match.params.paletteId}`;
 
     return (
       <div className="EditPalette">
         <h2>Edit Palette</h2>
         <FormControl className="EditPalette__form" disabled={!!githubRepo}>
-          <InputLabel htmlFor="paletteName"></InputLabel>
+          <InputLabel htmlFor="paletteName">{validated ? '' : <div className="validation">Please enter a name</div>}</InputLabel>
           <Input
             id="paletteName"
             aria-describedby="my-helper-text"
@@ -123,6 +135,7 @@ class EditPalette extends React.Component {
             </div>
         }
         <div className="EditPalette__button">
+          <Link to={backLink} className="cancel-link"><Button variant="outlined" className="cancel-palette">Cancel</Button></Link>
           <Button variant="outlined" className="EditPalette__update" onClick={this.updatePalette}>Update</Button>
         </div>
       </div>
