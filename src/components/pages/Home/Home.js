@@ -48,8 +48,6 @@ class Home extends React.Component {
             <div className="Home__palette-container">
               {paletteCards}
             </div>
-              <img className="Home__logo" alt="Hold my color logo"
-              src="https://firebasestorage.googleapis.com/v0/b/hold-my-color.appspot.com/o/mugs-logo.png?alt=media&token=38569660-e757-4006-a85b-f919736e2813"></img>
             </>
         }
       </div>
