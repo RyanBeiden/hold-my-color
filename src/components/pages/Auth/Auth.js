@@ -48,6 +48,8 @@ class Auth extends React.Component {
             <Button variant="outlined" onClick={this.githubSignInEvent}><i className="fab fa-github"></i> Sign in with Github</Button>
           </div>
         </Container>
+        <img className="Home__logo" alt="Hold my color logo"
+          src="https://firebasestorage.googleapis.com/v0/b/hold-my-color.appspot.com/o/mugs-logo.png?alt=media&token=38569660-e757-4006-a85b-f919736e2813"></img>
         <footer className="Auth__created-by">Created by Ryan Beiden</footer>
       </div>
     );
