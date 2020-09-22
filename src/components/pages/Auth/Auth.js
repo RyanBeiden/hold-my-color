@@ -37,7 +37,7 @@ class Auth extends React.Component {
     return (
       <div className="Auth">
         <h2>Build your color palette with ease.</h2>
-        <h3>More information here about the features of this web app</h3>
+        <h3>Simply download a SASS file or create a Github Issue with your new style guide.</h3>
         <Container className="Auth__container">
           <h4>Sign in to build a palette</h4>
           <Divider />
