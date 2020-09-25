@@ -12,7 +12,13 @@ As a user, when you sign in through Github, you receive the same features as a G
 
 ## Preview
 
-PREVIEW GIF/SCREENSHOTS
+#### New Palette & Color
+![Auth Sign-In Demo](./gifs/HMC-new-demo.gif)
+
+---
+
+#### Export Palette
+![Auth Sign-In Demo](./gifs/HMC-export-demo.gif)
 
 ## Deployed Project
 
