@@ -37,3 +37,4 @@ As a user, when you sign in through Github, you receive the same features as a G
 #### Backlog/Roadmap
 
 - Clear Colors Button
+- Palette Generator
